@@ -1,6 +1,6 @@
 import { ChangeEvent, FocusEvent, useCallback } from "react";
 
-import { WidgetProps, getInputProps } from "@rjsf/utils";
+import { type WidgetProps, getInputProps } from "@rjsf/utils";
 
 import { Input } from "@/components/ui/input";
 
@@ -43,8 +43,7 @@ export function TextWidget(props: WidgetProps) {
       id={id}
       name={name}
       value={value || value === 0 ? value : ""}
-      readOnly={readonly}
-      disabled={disabled}
+      disabled={disabled || readonly}
       autoFocus={autofocus}
       {...inputProps}
       onBlur={handleBlur}

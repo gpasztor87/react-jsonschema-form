@@ -9,7 +9,21 @@ export const schema: RJSFSchema = {
     },
     age: {
       title: "Age",
-      type: "number",
+      type: "integer",
+    },
+    bio: {
+      title: "Bio",
+      type: "string",
+    },
+    password: {
+      title: "Password",
+      type: "string",
+      minLength: 3,
+    },
+    telephone: {
+      title: "Telephone",
+      type: "string",
+      minLegth: 10,
     },
     terms: {
       title: "Accept terms and conditions",
@@ -24,43 +38,27 @@ export const schema: RJSFSchema = {
       },
       uniqueItems: true,
     },
-    demoProperties: {
-      title: "Demo properties",
-      type: "object",
-      properties: {
-        demoProperty1: {
-          title: "Demo 1",
-          type: "string",
-        },
-        demoProperty2: {
-          title: "Demo 2",
-          type: "string",
-          minLength: 3,
-        },
-        demoProperty3: {
-          title: "Demo 3",
-          type: "string",
-          enum: ["one", "two", "three"],
-        },
-      },
-      required: ["demoProperty1", "demoProperty2"],
-    },
   },
-  required: ["terms", "demoProperties"],
+  required: ["terms"],
 };
 
 export const uiSchema: UiSchema = {
+  bio: {
+    "ui:widget": "textarea",
+  },
+  password: {
+    "ui:widget": "password",
+    "ui:help": "Hint: Make it strong!",
+  },
+  telephone: {
+    "ui:options": {
+      inputType: "tel",
+    },
+  },
   multipleChoicesList: {
     "ui:widget": "checkboxes",
     "ui:options": {
-      inline: false,
+      inline: true,
     },
   },
-  // demoProperties: {
-  //   demoProperty2: {
-  //     "ui:options": {
-  //       inputType: "password",
-  //     },
-  //   },
-  // },
 };

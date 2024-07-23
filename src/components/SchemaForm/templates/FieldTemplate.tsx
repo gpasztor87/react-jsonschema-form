@@ -25,7 +25,7 @@ const fieldIsComplex = (props: FieldTemplateProps) => {
 };
 
 export function FieldTemplate(props: FieldTemplateProps) {
-  const { children, errors } = props;
+  const { children, displayLabel, errors } = props;
   const isFoldable = fieldIsFoldable(props);
   const isComplex = fieldIsComplex(props);
 
@@ -34,7 +34,7 @@ export function FieldTemplate(props: FieldTemplateProps) {
   return (
     <Collapsible disabled={!isFoldable} open={isOpen} onOpenChange={setIsOpen}>
       <div className="flex flex-col gap-2 mb-4">
-        <FieldLabel {...props} />
+        {displayLabel && <FieldLabel {...props} />}
         <CollapsibleContent className={cn(isComplex && "pl-4")}>
           {children}
         </CollapsibleContent>

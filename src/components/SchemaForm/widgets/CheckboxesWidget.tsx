@@ -1,7 +1,7 @@
 import { FocusEvent, useCallback } from "react";
 
 import {
-  WidgetProps,
+  type WidgetProps,
   enumOptionsDeselectValue,
   enumOptionsIsSelected,
   enumOptionsSelectValue,
