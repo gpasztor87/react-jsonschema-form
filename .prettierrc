@@ -1,8 +1,10 @@
 {
   "semi": true,
+  "tabWidth": 2,
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrder": [
-    "^@rjsf/(.*)$",
+    "^(react/(.*)$)|^(react$)",
+    "<THIRD_PARTY_MODULES>",
     "^@/components/(.*)$",
     "^@/hooks/(.*)$",
     "^@/lib/(.*)$",
