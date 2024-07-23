@@ -1,7 +1,13 @@
 {
   "semi": true,
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
-  "importOrder": ["^@rjsf/(.*)$", "^@/components/(.*)$", "^[./]"],
+  "importOrder": [
+    "^@rjsf/(.*)$",
+    "^@/components/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/lib/(.*)$",
+    "^[./]"
+  ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }
