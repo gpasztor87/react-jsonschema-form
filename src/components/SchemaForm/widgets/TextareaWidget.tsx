@@ -1,53 +1,52 @@
 import { ChangeEvent, FocusEvent, useCallback } from "react";
 
-import { WidgetProps, getInputProps } from "@rjsf/utils";
+import { WidgetProps } from "@rjsf/utils";
 
-import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
-export function TextWidget(props: WidgetProps) {
+export function TextareaWidget(props: WidgetProps) {
   const {
     id,
     name,
     onBlur,
     onChange,
     onFocus,
+    placeholder,
     autofocus,
-    readonly,
     disabled,
+    readonly,
     options,
-    schema,
   } = props;
-  const inputProps = getInputProps(schema, undefined, options);
 
   const handleChange = useCallback(
-    ({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
+    ({ target: { value } }: ChangeEvent<HTMLTextAreaElement>) =>
       onChange(value === "" ? options.emptyValue : value),
     [onChange, options],
   );
 
   const handleBlur = useCallback(
-    ({ target }: FocusEvent<HTMLInputElement>) =>
+    ({ target }: FocusEvent<HTMLTextAreaElement>) =>
       onBlur(id, target && target.value),
     [onBlur, id],
   );
 
   const handleFocus = useCallback(
-    ({ target }: FocusEvent<HTMLInputElement>) =>
+    ({ target }: FocusEvent<HTMLTextAreaElement>) =>
       onFocus(id, target && target.value),
     [onFocus, id],
   );
 
   return (
-    <Input
+    <Textarea
       id={id}
       name={name}
-      readOnly={readonly}
-      disabled={disabled}
       autoFocus={autofocus}
-      {...inputProps}
-      onBlur={handleBlur}
+      placeholder={placeholder}
+      disabled={disabled || readonly}
       onChange={handleChange}
+      onBlur={handleBlur}
       onFocus={handleFocus}
+      rows={options.rows}
     />
   );
 }
