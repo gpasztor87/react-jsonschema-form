@@ -15,6 +15,15 @@ export const schema: RJSFSchema = {
       title: "Accept terms and conditions",
       type: "boolean",
     },
+    multipleChoicesList: {
+      type: "array",
+      title: "A multiple choices list",
+      items: {
+        type: "string",
+        enum: ["foo", "bar", "fuzz", "qux"],
+      },
+      uniqueItems: true,
+    },
     demoProperties: {
       title: "Demo properties",
       type: "object",
@@ -26,6 +35,7 @@ export const schema: RJSFSchema = {
         demoProperty2: {
           title: "Demo 2",
           type: "string",
+          minLength: 3,
         },
         demoProperty3: {
           title: "Demo 3",
@@ -40,11 +50,17 @@ export const schema: RJSFSchema = {
 };
 
 export const uiSchema: UiSchema = {
-  demoProperties: {
-    demoProperty2: {
-      "ui:options": {
-        inputType: "password",
-      },
+  multipleChoicesList: {
+    "ui:widget": "checkboxes",
+    "ui:options": {
+      inline: false,
     },
   },
+  // demoProperties: {
+  //   demoProperty2: {
+  //     "ui:options": {
+  //       inputType: "password",
+  //     },
+  //   },
+  // },
 };
