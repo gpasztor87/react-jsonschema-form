@@ -1,7 +1,7 @@
-import { ComponentProps, ReactNode, forwardRef, useState } from "react";
+import { ComponentProps, forwardRef, useState } from "react";
 
 import Form from "@rjsf/core";
-import { RJSFSchema } from "@rjsf/utils";
+import { RJSFSchema, UiSchema } from "@rjsf/utils";
 import validator from "@rjsf/validator-ajv8";
 
 import templates from "@/components/SchemaForm/templates";
@@ -9,9 +9,8 @@ import widgets from "@/components/SchemaForm/widgets";
 
 interface BaseSchemaFormProps {
   schema: RJSFSchema;
+  uiSchema?: UiSchema;
   onSubmit: (data: any) => void | Promise<void>;
-  children?: ReactNode;
-  uiSchema?: any;
 }
 
 export interface SchemaFormProps extends BaseSchemaFormProps {

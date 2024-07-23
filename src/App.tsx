@@ -1,4 +1,4 @@
-import schema from "@/schema.json";
+import { schema, uiSchema } from "@/schema";
 
 import { SchemaForm } from "@/components/SchemaForm";
 
@@ -7,7 +7,7 @@ import "./App.css";
 function App() {
   return (
     <div className="border p-5">
-      <SchemaForm schema={schema} onSubmit={(data) => console.log(data)} />
+      <SchemaForm schema={schema} uiSchema={uiSchema} onSubmit={console.log} />
     </div>
   );
 }
