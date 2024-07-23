@@ -11,27 +11,39 @@ export const schema: RJSFSchema = {
       title: "Age",
       type: "number",
     },
-    demoProperty1: {
-      title: "Demo 1",
-      type: "string",
+    terms: {
+      title: "Accept terms and conditions",
+      type: "boolean",
     },
-    demoProperty2: {
-      title: "Demo 2",
-      type: "string",
-    },
-    demoProperty3: {
-      title: "Demo 3",
-      type: "string",
-      enum: ["one", "two", "three"],
+    demoProperties: {
+      title: "Demo properties",
+      type: "object",
+      properties: {
+        demoProperty1: {
+          title: "Demo 1",
+          type: "string",
+        },
+        demoProperty2: {
+          title: "Demo 2",
+          type: "string",
+        },
+        demoProperty3: {
+          title: "Demo 3",
+          type: "string",
+          enum: ["one", "two", "three"],
+        },
+      },
+      required: ["demoProperty1", "demoProperty2"],
     },
   },
-  required: ["demoProperty1", "demoProperty2"],
 };
 
 export const uiSchema: UiSchema = {
-  demoProperty2: {
-    "ui:options": {
-      inputType: "password",
+  demoProperties: {
+    demoProperty2: {
+      "ui:options": {
+        inputType: "password",
+      },
     },
   },
 };
