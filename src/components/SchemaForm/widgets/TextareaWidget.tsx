@@ -8,6 +8,7 @@ export function TextareaWidget(props: WidgetProps) {
   const {
     id,
     name,
+    value,
     onBlur,
     onChange,
     onFocus,
@@ -40,6 +41,7 @@ export function TextareaWidget(props: WidgetProps) {
     <Textarea
       id={id}
       name={name}
+      value={value ?? ""}
       autoFocus={autofocus}
       placeholder={placeholder}
       disabled={disabled || readonly}

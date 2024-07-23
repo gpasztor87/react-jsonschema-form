@@ -8,6 +8,7 @@ export function TextWidget(props: WidgetProps) {
   const {
     id,
     name,
+    value,
     onBlur,
     onChange,
     onFocus,
@@ -41,6 +42,7 @@ export function TextWidget(props: WidgetProps) {
     <Input
       id={id}
       name={name}
+      value={value || value === 0 ? value : ""}
       readOnly={readonly}
       disabled={disabled}
       autoFocus={autofocus}

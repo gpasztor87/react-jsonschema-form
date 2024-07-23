@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 
 export function SelectWidget(props: WidgetProps) {
-  const { id, name, value, onChange } = props;
+  const { id, name, placeholder, value, onChange } = props;
 
   const options = useMemo(() => {
     return (props.schema.enum ?? []).map((id: any) => {
@@ -30,7 +30,7 @@ export function SelectWidget(props: WidgetProps) {
     >
       <>
         <SelectTrigger id={id}>
-          <SelectValue placeholder="Select" />
+          <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

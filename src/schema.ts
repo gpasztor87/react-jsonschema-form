@@ -36,6 +36,7 @@ export const schema: RJSFSchema = {
       required: ["demoProperty1", "demoProperty2"],
     },
   },
+  required: ["terms", "demoProperties"],
 };
 
 export const uiSchema: UiSchema = {
