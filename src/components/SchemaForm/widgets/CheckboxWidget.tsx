@@ -1,10 +1,6 @@
 import { FocusEvent, useCallback } from "react";
 
-import {
-  type WidgetProps,
-  labelValue,
-  schemaRequiresTrueValue,
-} from "@rjsf/utils";
+import { type WidgetProps, labelValue } from "@rjsf/utils";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -19,11 +15,8 @@ export function CheckboxWidget(props: WidgetProps) {
     onBlur,
     onChange,
     onFocus,
-    schema,
     value,
   } = props;
-
-  const required = schemaRequiresTrueValue(schema);
 
   const handleChange = useCallback(
     (checked: boolean) => onChange(checked),
@@ -46,7 +39,6 @@ export function CheckboxWidget(props: WidgetProps) {
         id={id}
         name={id}
         checked={value}
-        required={required}
         disabled={disabled || readonly}
         onCheckedChange={handleChange}
         onBlur={handleBlur}
