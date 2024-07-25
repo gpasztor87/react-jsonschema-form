@@ -70,16 +70,14 @@ export function ObjectFieldTemplate<
           registry={registry}
         />
       )}
-      <div className="pl-4">
-        {properties.map((element: any, index: number) => (
-          <div
-            key={index}
-            className={cn(element.hidden && "hidden", "flex mb-2.5")}
-          >
-            <div className="w-full">{element.content}</div>
-          </div>
-        ))}
-      </div>
+      {properties.map((element: any, index: number) => (
+        <div
+          key={index}
+          className={cn(element.hidden && "hidden", "flex mb-2.5")}
+        >
+          <div className="w-full">{element.content}</div>
+        </div>
+      ))}
       {canExpand<T, S, F>(schema, uiSchema, formData) ? (
         <div className="flex">
           <div className="ml-auto py-4">

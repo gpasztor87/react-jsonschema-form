@@ -29,37 +29,43 @@ export const schema: RJSFSchema = {
       title: "Accept terms and conditions",
       type: "boolean",
     },
-    jobs: {
-      title: "Jobs",
+    keyValuePair: {
+      title: "Key Value",
       type: "object",
       additionalProperties: {
-        title: "Job",
+        type: "string",
+      },
+    },
+    keyValuePairObject: {
+      title: "Key Value Object",
+      type: "object",
+      additionalProperties: {
+        title: "",
         type: "object",
         properties: {
-          companyName: {
-            title: "Company name",
+          name: {
+            title: "Name",
             type: "string",
           },
-          position: {
-            title: "Position",
+          namespace: {
+            title: "Namespace",
             type: "string",
-            enum: ["Software developer", "Manager", "Tester"],
           },
         },
-        required: ["companyName", "position"],
+        required: ["name"],
       },
     },
-    multipleChoicesList: {
-      type: "array",
-      title: "A multiple choices list",
-      items: {
-        type: "string",
-        enum: ["foo", "bar", "fuzz", "qux"],
-      },
-      uniqueItems: true,
-    },
+    // multipleChoicesList: {
+    //   type: "array",
+    //   title: "A multiple choices list",
+    //   items: {
+    //     type: "string",
+    //     enum: ["foo", "bar", "fuzz", "qux"],
+    //   },
+    //   uniqueItems: true,
+    // },
   },
-  required: ["name", "terms", "jobs"],
+  required: ["name", "terms", "keyValuePair"],
 };
 
 export const uiSchema: UiSchema = {
@@ -78,10 +84,10 @@ export const uiSchema: UiSchema = {
       inputType: "tel",
     },
   },
-  multipleChoicesList: {
-    "ui:widget": "checkboxes",
-    "ui:options": {
-      inline: true,
-    },
-  },
+  // multipleChoicesList: {
+  //   "ui:widget": "checkboxes",
+  //   "ui:options": {
+  //     inline: true,
+  //   },
+  // },
 };

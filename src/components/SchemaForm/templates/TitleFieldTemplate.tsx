@@ -14,8 +14,6 @@ export function TitleFieldTemplate<
   const { id, title, required, uiSchema } = props;
   const uiOptions = getUiOptions<T, S, F>(uiSchema);
 
-  console.log(props);
-
   return (
     <div id={id}>
       <h5 className="mb-2 text-xl font-medium leading-tight">

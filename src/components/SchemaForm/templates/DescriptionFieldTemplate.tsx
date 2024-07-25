@@ -18,13 +18,13 @@ export function DescriptionFieldTemplate<
 
   if (typeof description === "string") {
     return (
-      <p id={id} className="text-sm text-destructive">
+      <p id={id} className="text-sm text-muted-foreground mb-4">
         {description}
       </p>
     );
   } else {
     return (
-      <div id={id} className="text-sm text-muted-foreground">
+      <div id={id} className="text-sm text-muted-foreground mb-4">
         {description}
       </div>
     );

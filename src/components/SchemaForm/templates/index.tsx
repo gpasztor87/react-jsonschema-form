@@ -20,6 +20,7 @@ import { FieldTemplate } from "./FieldTemplate";
 import { ObjectFieldTemplate } from "./ObjectFieldTemplate";
 import { TitleFieldTemplate } from "./TitleFieldTemplate";
 import { UnsupportedFieldTemplate } from "./UnsupportedFieldTemplate";
+import { WrapIfAdditionalTemplate } from "./WrapIfAdditionalTemplate";
 
 export function generateTemplates<
   T = any,
@@ -42,6 +43,7 @@ export function generateTemplates<
     ObjectFieldTemplate,
     TitleFieldTemplate,
     UnsupportedFieldTemplate,
+    WrapIfAdditionalTemplate,
   };
 }
 

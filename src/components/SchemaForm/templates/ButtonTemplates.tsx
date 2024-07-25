@@ -7,7 +7,13 @@ import {
   TranslatableString,
   getSubmitButtonOptions,
 } from "@rjsf/utils";
-import { PlusIcon } from "lucide-react";
+import {
+  CopyIcon,
+  MinusIcon,
+  MoveDownIcon,
+  MoveUpIcon,
+  PlusIcon,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -16,8 +22,11 @@ export function AddButton<
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: IconButtonProps<T, S, F>) {
-  const { uiSchema, registry, ...btnProps } = props;
-  const { translateString } = registry;
+  const {
+    uiSchema,
+    registry: { translateString },
+    ...btnProps
+  } = props;
 
   return (
     <Button type="button" variant="secondary" {...btnProps}>
@@ -32,11 +41,21 @@ export function RemoveButton<
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: IconButtonProps<T, S, F>) {
-  const { uiSchema, registry, ...btnProps } = props;
+  const {
+    uiSchema,
+    registry: { translateString },
+    ...btnProps
+  } = props;
 
   return (
-    <Button type="button" {...btnProps}>
-      Remove
+    <Button
+      type="button"
+      size="icon"
+      variant="ghost"
+      title={translateString(TranslatableString.RemoveButton)}
+      {...btnProps}
+    >
+      <MinusIcon className="h-4 w-4 text-destructive" />
     </Button>
   );
 }
@@ -46,11 +65,21 @@ export function MoveUpButton<
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: IconButtonProps<T, S, F>) {
-  const { uiSchema, registry, ...btnProps } = props;
+  const {
+    uiSchema,
+    registry: { translateString },
+    ...btnProps
+  } = props;
 
   return (
-    <Button type="button" {...btnProps}>
-      Move up
+    <Button
+      type="button"
+      size="icon"
+      variant="ghost"
+      title={translateString(TranslatableString.MoveUpButton)}
+      {...btnProps}
+    >
+      <MoveUpIcon className="h-4 w-4" />
     </Button>
   );
 }
@@ -60,11 +89,21 @@ export function MoveDownButton<
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: IconButtonProps<T, S, F>) {
-  const { uiSchema, registry, ...btnProps } = props;
+  const {
+    uiSchema,
+    registry: { translateString },
+    ...btnProps
+  } = props;
 
   return (
-    <Button type="button" {...btnProps}>
-      Move down
+    <Button
+      type="button"
+      size="icon"
+      variant="ghost"
+      title={translateString(TranslatableString.MoveDownButton)}
+      {...btnProps}
+    >
+      <MoveDownIcon className="h-4 w-4" />
     </Button>
   );
 }
@@ -74,11 +113,21 @@ export function CopyButton<
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: IconButtonProps<T, S, F>) {
-  const { uiSchema, registry, ...btnProps } = props;
+  const {
+    uiSchema,
+    registry: { translateString },
+    ...btnProps
+  } = props;
 
   return (
-    <Button type="button" {...btnProps}>
-      Copy
+    <Button
+      type="button"
+      size="icon"
+      variant="ghost"
+      title={translateString(TranslatableString.CopyButton)}
+      {...btnProps}
+    >
+      <CopyIcon className="h-4 w-4" />
     </Button>
   );
 }

@@ -1,8 +1,10 @@
 import {
   type FieldTemplateProps,
-  FormContextType,
-  RJSFSchema,
-  StrictRJSFSchema,
+  type FormContextType,
+  type RJSFSchema,
+  type StrictRJSFSchema,
+  getTemplate,
+  getUiOptions,
 } from "@rjsf/utils";
 
 import { Label } from "@/components/ui/label";
@@ -13,29 +15,58 @@ export function FieldTemplate<
   F extends FormContextType = any,
 >(props: FieldTemplateProps<T, S, F>) {
   const {
+    id,
     children,
+    label,
     description,
+    disabled,
+    readonly,
     displayLabel,
     errors,
     help,
     hidden,
     rawDescription,
+    onDropPropertyClick,
+    onKeyChange,
+    registry,
+    schema,
+    uiSchema,
   } = props;
+  const uiOptions = getUiOptions<T, S, F>(uiSchema);
+
+  const WrapIfAdditionalTemplate = getTemplate<
+    "WrapIfAdditionalTemplate",
+    T,
+    S,
+    F
+  >("WrapIfAdditionalTemplate", registry, uiOptions);
 
   if (hidden) {
     return <div className="hidden">{children}</div>;
   }
 
   return (
-    <div className="block mb-4">
-      {displayLabel && <FieldLabel {...props} />}
-      {children}
-      {displayLabel && rawDescription && (
-        <div className="mt-1 block">{description}</div>
-      )}
-      {errors}
-      {help}
-    </div>
+    <WrapIfAdditionalTemplate
+      id={id}
+      label={label}
+      disabled={disabled}
+      readonly={readonly}
+      onDropPropertyClick={onDropPropertyClick}
+      onKeyChange={onKeyChange}
+      schema={schema}
+      uiSchema={uiSchema}
+      registry={registry}
+    >
+      <div className="block mb-4">
+        {displayLabel && <FieldLabel {...props} />}
+        {children}
+        {displayLabel && rawDescription && (
+          <div className="mt-1 block">{description}</div>
+        )}
+        {errors}
+        {help}
+      </div>
+    </WrapIfAdditionalTemplate>
   );
 }
 
