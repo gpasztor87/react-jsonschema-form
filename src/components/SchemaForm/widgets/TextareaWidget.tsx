@@ -1,10 +1,19 @@
 import { ChangeEvent, FocusEvent, useCallback } from "react";
 
-import { type WidgetProps } from "@rjsf/utils";
+import {
+  type FormContextType,
+  type RJSFSchema,
+  type StrictRJSFSchema,
+  type WidgetProps,
+} from "@rjsf/utils";
 
 import { Textarea } from "@/components/ui/textarea";
 
-export function TextareaWidget(props: WidgetProps) {
+export function TextareaWidget<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: WidgetProps<T, S, F>) {
   const {
     id,
     name,

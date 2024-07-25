@@ -1,10 +1,20 @@
 import { ChangeEvent, FocusEvent, useCallback } from "react";
 
-import { type WidgetProps, getInputProps } from "@rjsf/utils";
+import {
+  type FormContextType,
+  type RJSFSchema,
+  type StrictRJSFSchema,
+  type WidgetProps,
+  getInputProps,
+} from "@rjsf/utils";
 
 import { Input } from "@/components/ui/input";
 
-export function TextWidget(props: WidgetProps) {
+export function TextWidget<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: WidgetProps<T, S, F>) {
   const {
     id,
     name,
@@ -18,7 +28,7 @@ export function TextWidget(props: WidgetProps) {
     options,
     schema,
   } = props;
-  const inputProps = getInputProps(schema, undefined, options);
+  const inputProps = getInputProps<T, S, F>(schema, undefined, options);
 
   const handleChange = useCallback(
     ({ target: { value } }: ChangeEvent<HTMLInputElement>) =>

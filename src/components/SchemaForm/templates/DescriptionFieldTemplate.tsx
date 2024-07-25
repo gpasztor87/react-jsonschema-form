@@ -1,6 +1,15 @@
-import { type DescriptionFieldProps } from "@rjsf/utils";
+import {
+  type DescriptionFieldProps,
+  type FormContextType,
+  type RJSFSchema,
+  type StrictRJSFSchema,
+} from "@rjsf/utils";
 
-export function DescriptionFieldTemplate(props: DescriptionFieldProps) {
+export function DescriptionFieldTemplate<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: DescriptionFieldProps<T, S, F>) {
   const { description, id } = props;
 
   if (description === undefined || description === "") {

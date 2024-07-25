@@ -1,8 +1,18 @@
-import { type IconButtonProps, type SubmitButtonProps } from "@rjsf/utils";
+import {
+  type FormContextType,
+  type IconButtonProps,
+  type RJSFSchema,
+  type StrictRJSFSchema,
+  type SubmitButtonProps,
+} from "@rjsf/utils";
 
 import { Button } from "@/components/ui/button";
 
-export function AddButton(props: IconButtonProps) {
+export function AddButton<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: IconButtonProps<T, S, F>) {
   const { icon, iconType, ...btnProps } = props;
   return (
     <Button type="button" {...btnProps}>
@@ -11,7 +21,11 @@ export function AddButton(props: IconButtonProps) {
   );
 }
 
-export function RemoveButton(props: IconButtonProps) {
+export function RemoveButton<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: IconButtonProps<T, S, F>) {
   const { icon, iconType, ...btnProps } = props;
   return (
     <Button type="button" {...btnProps}>
@@ -20,7 +34,11 @@ export function RemoveButton(props: IconButtonProps) {
   );
 }
 
-export function MoveUpButton(props: IconButtonProps) {
+export function MoveUpButton<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: IconButtonProps<T, S, F>) {
   const { icon, iconType, ...btnProps } = props;
   return (
     <Button type="button" {...btnProps}>
@@ -29,7 +47,11 @@ export function MoveUpButton(props: IconButtonProps) {
   );
 }
 
-export function MoveDownButton(props: IconButtonProps) {
+export function MoveDownButton<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: IconButtonProps<T, S, F>) {
   const { icon, iconType, ...btnProps } = props;
   return (
     <Button type="button" {...btnProps}>
@@ -38,7 +60,11 @@ export function MoveDownButton(props: IconButtonProps) {
   );
 }
 
-export function CopyButton(props: IconButtonProps) {
+export function CopyButton<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: IconButtonProps<T, S, F>) {
   const { icon, iconType, ...btnProps } = props;
   return (
     <Button type="button" {...btnProps}>
@@ -47,15 +73,10 @@ export function CopyButton(props: IconButtonProps) {
   );
 }
 
-export function SubmitButton(props: SubmitButtonProps) {
+export function SubmitButton<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: SubmitButtonProps<T, S, F>) {
   return <Button type="submit">Submit</Button>;
 }
-
-export const ButtonTemplates = {
-  AddButton,
-  RemoveButton,
-  MoveUpButton,
-  MoveDownButton,
-  CopyButton,
-  SubmitButton,
-} as const;

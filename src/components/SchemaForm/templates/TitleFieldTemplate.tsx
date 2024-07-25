@@ -1,8 +1,18 @@
-import { type TitleFieldProps, getUiOptions } from "@rjsf/utils";
+import {
+  type FormContextType,
+  type RJSFSchema,
+  type StrictRJSFSchema,
+  type TitleFieldProps,
+  getUiOptions,
+} from "@rjsf/utils";
 
-export function TitleFieldTemplate(props: TitleFieldProps) {
+export function TitleFieldTemplate<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: TitleFieldProps<T, S, F>) {
   const { id, title, uiSchema } = props;
-  const uiOptions = getUiOptions(uiSchema);
+  const uiOptions = getUiOptions<T, S, F>(uiSchema);
 
   return (
     <div id={id}>

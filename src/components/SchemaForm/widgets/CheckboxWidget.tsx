@@ -1,11 +1,21 @@
 import { FocusEvent, useCallback } from "react";
 
-import { type WidgetProps, labelValue } from "@rjsf/utils";
+import {
+  type FormContextType,
+  type RJSFSchema,
+  type StrictRJSFSchema,
+  type WidgetProps,
+  labelValue,
+} from "@rjsf/utils";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
-export function CheckboxWidget(props: WidgetProps) {
+export function CheckboxWidget<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: WidgetProps<T, S, F>) {
   const {
     id,
     label,

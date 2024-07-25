@@ -1,6 +1,9 @@
 import { FocusEvent, useCallback } from "react";
 
 import {
+  type FormContextType,
+  type RJSFSchema,
+  type StrictRJSFSchema,
   type WidgetProps,
   enumOptionsDeselectValue,
   enumOptionsIsSelected,
@@ -14,7 +17,11 @@ import { Label } from "@/components/ui/label";
 
 import { cn } from "@/lib/utils";
 
-export function CheckboxesWidget(props: WidgetProps) {
+export function CheckboxesWidget<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: WidgetProps<T, S, F>) {
   const { id, disabled, readonly, value, onBlur, onChange, onFocus, options } =
     props;
 
@@ -26,7 +33,7 @@ export function CheckboxesWidget(props: WidgetProps) {
     ({ target }: FocusEvent<HTMLButtonElement>) =>
       onBlur(
         id,
-        enumOptionsValueForIndex(
+        enumOptionsValueForIndex<S>(
           target && target.value,
           enumOptions,
           emptyValue,
@@ -39,7 +46,7 @@ export function CheckboxesWidget(props: WidgetProps) {
     ({ target }: FocusEvent<HTMLButtonElement>) =>
       onFocus(
         id,
-        enumOptionsValueForIndex(
+        enumOptionsValueForIndex<S>(
           target && target.value,
           enumOptions,
           emptyValue,
@@ -57,7 +64,10 @@ export function CheckboxesWidget(props: WidgetProps) {
     >
       {Array.isArray(enumOptions) &&
         enumOptions.map((option, index) => {
-          const checked = enumOptionsIsSelected(option.value, checkboxesValues);
+          const checked = enumOptionsIsSelected<S>(
+            option.value,
+            checkboxesValues,
+          );
           const itemDisabled =
             Array.isArray(enumDisabled) &&
             enumDisabled.indexOf(option.value) !== -1;
@@ -65,11 +75,15 @@ export function CheckboxesWidget(props: WidgetProps) {
           const handleChange = (checked: boolean) => {
             if (checked) {
               onChange(
-                enumOptionsSelectValue(index, checkboxesValues, enumOptions),
+                enumOptionsSelectValue<S>(index, checkboxesValues, enumOptions),
               );
             } else {
               onChange(
-                enumOptionsDeselectValue(index, checkboxesValues, enumOptions),
+                enumOptionsDeselectValue<S>(
+                  index,
+                  checkboxesValues,
+                  enumOptions,
+                ),
               );
             }
           };

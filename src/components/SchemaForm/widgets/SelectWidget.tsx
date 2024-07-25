@@ -1,6 +1,11 @@
 import { useMemo } from "react";
 
-import { type WidgetProps } from "@rjsf/utils";
+import {
+  type FormContextType,
+  type RJSFSchema,
+  type StrictRJSFSchema,
+  type WidgetProps,
+} from "@rjsf/utils";
 
 import {
   Select,
@@ -11,7 +16,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function SelectWidget(props: WidgetProps) {
+export function SelectWidget<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: WidgetProps<T, S, F>) {
   const { id, name, placeholder, value, onChange } = props;
 
   const options = useMemo(() => {

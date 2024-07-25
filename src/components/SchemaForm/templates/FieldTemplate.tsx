@@ -1,9 +1,17 @@
-import { type FieldTemplateProps } from "@rjsf/utils";
+import {
+  type FieldTemplateProps,
+  FormContextType,
+  RJSFSchema,
+  StrictRJSFSchema,
+} from "@rjsf/utils";
 
-import { FormContext } from "@/components/SchemaForm";
 import { Label } from "@/components/ui/label";
 
-export function FieldTemplate(props: FieldTemplateProps) {
+export function FieldTemplate<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: FieldTemplateProps<T, S, F>) {
   const {
     children,
     description,
@@ -31,9 +39,13 @@ export function FieldTemplate(props: FieldTemplateProps) {
   );
 }
 
-function FieldLabel(props: FieldTemplateProps) {
+function FieldLabel<
+  T = any,
+  S extends StrictRJSFSchema = RJSFSchema,
+  F extends FormContextType = any,
+>(props: FieldTemplateProps<T, S, F>) {
   const { id, label, required, schema } = props;
-  const formContext = props.formContext as FormContext;
+  const formContext = props.formContext;
 
   if (label === "") {
     return null;
@@ -43,7 +55,7 @@ function FieldLabel(props: FieldTemplateProps) {
     <Label htmlFor={id} className="block mb-2">
       {label}
       {required && <span className="text-destructive">*</span>}
-      {formContext.showTypes && (
+      {formContext && formContext.showTypes && (
         <pre className="italic inline-block ml-2 text-muted-foreground">
           [{schema.type}]
         </pre>

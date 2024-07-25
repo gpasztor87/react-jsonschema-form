@@ -1,21 +1,21 @@
 import { forwardRef, useMemo } from "react";
 
 import Form from "@rjsf/core";
-import { type RJSFSchema, type UiSchema } from "@rjsf/utils";
+import {
+  type FormContextType,
+  type RJSFSchema,
+  type UiSchema,
+} from "@rjsf/utils";
 import validator from "@rjsf/validator-ajv8";
 
 import templates from "@/components/SchemaForm/templates";
 import widgets from "@/components/SchemaForm/widgets";
 
-export interface FormContext {
-  showTypes?: boolean;
-}
-
 export interface SchemaFormProps {
   schema: RJSFSchema;
   uiSchema?: UiSchema;
   formData?: any;
-  formContext?: FormContext;
+  formContext?: FormContextType;
   onSubmit: (data: any) => void | Promise<void>;
 }
 
@@ -23,7 +23,7 @@ export type SchemaFormRef = Form<any>;
 
 export const SchemaForm = forwardRef<SchemaFormRef, SchemaFormProps>(
   (props: SchemaFormProps, ref) => {
-    const formContext = useMemo<FormContext>(
+    const formContext = useMemo<FormContextType>(
       () => ({
         showTypes: true,
         ...props.formContext,
