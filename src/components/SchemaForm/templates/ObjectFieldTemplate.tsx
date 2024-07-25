@@ -38,6 +38,7 @@ export function ObjectFieldTemplate<
     registry,
     uiOptions,
   );
+
   const DescriptionFieldTemplate = getTemplate<
     "DescriptionFieldTemplate",
     T,

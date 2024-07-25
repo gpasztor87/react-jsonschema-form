@@ -43,17 +43,19 @@ export function WrapIfAdditionalTemplate<
   return (
     <div className="flex w-full gap-4">
       <div className="flex-1">
-        <Label htmlFor={`${id}-key`} className="block mb-2">
-          {keyLabel}
-        </Label>
-        <Input
-          id={`${id}-key`}
-          onBlur={({ target }) => onKeyChange(target && target.value)}
-          defaultValue={label}
-        />
+        <div className="block mb-4">
+          <Label htmlFor={`${id}-key`} className="block mb-2">
+            {keyLabel}
+          </Label>
+          <Input
+            id={`${id}-key`}
+            onBlur={({ target }) => onKeyChange(target && target.value)}
+            defaultValue={label}
+          />
+        </div>
       </div>
       <div className="flex-1">{children}</div>
-      <div className="flex flex-row items-center">
+      <div className="flex flex-row items-start mt-6">
         <RemoveButton
           onClick={onDropPropertyClick(label)}
           disabled={disabled || readonly}

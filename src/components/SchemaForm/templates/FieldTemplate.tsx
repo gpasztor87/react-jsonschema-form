@@ -75,7 +75,7 @@ function FieldLabel<
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: FieldTemplateProps<T, S, F>) {
-  const { id, label, required, formContext, schema } = props;
+  const { id, label, required } = props;
 
   if (label === "") {
     return null;
@@ -85,11 +85,6 @@ function FieldLabel<
     <Label htmlFor={id} className="block mb-2">
       {label}
       {required && <span className="text-destructive">*</span>}
-      {formContext && formContext.showTypes && (
-        <pre className="italic inline-block ml-2 text-muted-foreground">
-          [{schema.type}]
-        </pre>
-      )}
     </Label>
   );
 }

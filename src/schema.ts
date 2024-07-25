@@ -28,31 +28,13 @@ export const schema: RJSFSchema = {
     terms: {
       title: "Accept terms and conditions",
       type: "boolean",
+      enum: [true],
     },
-    keyValuePair: {
-      title: "Key Value",
-      type: "object",
-      additionalProperties: {
+    positions: {
+      title: "Positions",
+      type: "array",
+      items: {
         type: "string",
-      },
-    },
-    keyValuePairObject: {
-      title: "Key Value Object",
-      type: "object",
-      additionalProperties: {
-        title: "",
-        type: "object",
-        properties: {
-          name: {
-            title: "Name",
-            type: "string",
-          },
-          namespace: {
-            title: "Namespace",
-            type: "string",
-          },
-        },
-        required: ["name"],
       },
     },
     // multipleChoicesList: {
@@ -65,7 +47,7 @@ export const schema: RJSFSchema = {
     //   uniqueItems: true,
     // },
   },
-  required: ["name", "terms", "keyValuePair"],
+  required: ["name", "terms"],
 };
 
 export const uiSchema: UiSchema = {

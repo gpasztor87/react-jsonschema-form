@@ -12,7 +12,7 @@ import { SelectWidget } from "./SelectWidget";
 import { TextWidget } from "./TextWidget";
 import { TextareaWidget } from "./TextareaWidget";
 
-export function generateWidgets<
+function generateWidgets<
   T = any,
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,

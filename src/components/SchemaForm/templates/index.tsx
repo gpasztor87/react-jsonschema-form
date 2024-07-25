@@ -5,14 +5,9 @@ import {
   type TemplatesType,
 } from "@rjsf/utils";
 
-import {
-  AddButton,
-  CopyButton,
-  MoveDownButton,
-  MoveUpButton,
-  RemoveButton,
-  SubmitButton,
-} from "./ButtonTemplates";
+import { ArrayFieldItemTemplate } from "./ArrayFieldItemTemplate";
+import { ArrayFieldTemplate } from "./ArrayFieldTemplate";
+import { ButtonTemplates } from "./ButtonTemplates";
 import { DescriptionFieldTemplate } from "./DescriptionFieldTemplate";
 import { FieldErrorTemplate } from "./FieldErrorTemplate";
 import { FieldHelpTemplate } from "./FieldHelpTemplate";
@@ -22,20 +17,15 @@ import { TitleFieldTemplate } from "./TitleFieldTemplate";
 import { UnsupportedFieldTemplate } from "./UnsupportedFieldTemplate";
 import { WrapIfAdditionalTemplate } from "./WrapIfAdditionalTemplate";
 
-export function generateTemplates<
+function generateTemplates<
   T = any,
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(): Partial<TemplatesType<T, S, F>> {
   return {
-    ButtonTemplates: {
-      AddButton,
-      CopyButton,
-      MoveDownButton,
-      MoveUpButton,
-      RemoveButton,
-      SubmitButton,
-    },
+    ArrayFieldItemTemplate,
+    ArrayFieldTemplate,
+    ButtonTemplates: ButtonTemplates(),
     DescriptionFieldTemplate,
     FieldErrorTemplate,
     FieldHelpTemplate,

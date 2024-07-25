@@ -25,7 +25,7 @@ export const SchemaForm = forwardRef<SchemaFormRef, SchemaFormProps>(
   (props: SchemaFormProps, ref) => {
     const formContext = useMemo<FormContextType>(
       () => ({
-        showTypes: true,
+        // showTypes: true,
         ...props.formContext,
       }),
       [props.formContext],
