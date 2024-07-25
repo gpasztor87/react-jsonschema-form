@@ -44,8 +44,7 @@ function FieldLabel<
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: FieldTemplateProps<T, S, F>) {
-  const { id, label, required, schema } = props;
-  const formContext = props.formContext;
+  const { id, label, required, formContext, schema } = props;
 
   if (label === "") {
     return null;

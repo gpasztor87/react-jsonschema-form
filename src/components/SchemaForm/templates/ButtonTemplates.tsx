@@ -4,7 +4,10 @@ import {
   type RJSFSchema,
   type StrictRJSFSchema,
   type SubmitButtonProps,
+  TranslatableString,
+  getSubmitButtonOptions,
 } from "@rjsf/utils";
+import { PlusIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -13,10 +16,13 @@ export function AddButton<
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: IconButtonProps<T, S, F>) {
-  const { icon, iconType, ...btnProps } = props;
+  const { uiSchema, registry, ...btnProps } = props;
+  const { translateString } = registry;
+
   return (
-    <Button type="button" {...btnProps}>
-      Add
+    <Button type="button" variant="secondary" {...btnProps}>
+      <PlusIcon className="h-4 w-4 mr-2" />
+      {translateString(TranslatableString.AddItemButton)}
     </Button>
   );
 }
@@ -26,7 +32,8 @@ export function RemoveButton<
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: IconButtonProps<T, S, F>) {
-  const { icon, iconType, ...btnProps } = props;
+  const { uiSchema, registry, ...btnProps } = props;
+
   return (
     <Button type="button" {...btnProps}>
       Remove
@@ -39,7 +46,8 @@ export function MoveUpButton<
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: IconButtonProps<T, S, F>) {
-  const { icon, iconType, ...btnProps } = props;
+  const { uiSchema, registry, ...btnProps } = props;
+
   return (
     <Button type="button" {...btnProps}>
       Move up
@@ -52,7 +60,8 @@ export function MoveDownButton<
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: IconButtonProps<T, S, F>) {
-  const { icon, iconType, ...btnProps } = props;
+  const { uiSchema, registry, ...btnProps } = props;
+
   return (
     <Button type="button" {...btnProps}>
       Move down
@@ -65,7 +74,8 @@ export function CopyButton<
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: IconButtonProps<T, S, F>) {
-  const { icon, iconType, ...btnProps } = props;
+  const { uiSchema, registry, ...btnProps } = props;
+
   return (
     <Button type="button" {...btnProps}>
       Copy
@@ -78,5 +88,20 @@ export function SubmitButton<
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: SubmitButtonProps<T, S, F>) {
-  return <Button type="submit">Submit</Button>;
+  const { uiSchema } = props;
+  const {
+    submitText,
+    norender,
+    props: submitButtonProps = {},
+  } = getSubmitButtonOptions<T, S, F>(uiSchema);
+
+  if (norender) {
+    return null;
+  }
+
+  return (
+    <Button type="submit" {...submitButtonProps}>
+      {submitText}
+    </Button>
+  );
 }

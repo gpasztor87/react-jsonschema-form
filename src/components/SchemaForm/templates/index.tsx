@@ -17,6 +17,7 @@ import { DescriptionFieldTemplate } from "./DescriptionFieldTemplate";
 import { FieldErrorTemplate } from "./FieldErrorTemplate";
 import { FieldHelpTemplate } from "./FieldHelpTemplate";
 import { FieldTemplate } from "./FieldTemplate";
+import { ObjectFieldTemplate } from "./ObjectFieldTemplate";
 import { TitleFieldTemplate } from "./TitleFieldTemplate";
 import { UnsupportedFieldTemplate } from "./UnsupportedFieldTemplate";
 
@@ -38,6 +39,7 @@ export function generateTemplates<
     FieldErrorTemplate,
     FieldHelpTemplate,
     FieldTemplate,
+    ObjectFieldTemplate,
     TitleFieldTemplate,
     UnsupportedFieldTemplate,
   };

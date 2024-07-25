@@ -29,21 +29,25 @@ export const schema: RJSFSchema = {
       title: "Accept terms and conditions",
       type: "boolean",
     },
-    job: {
-      title: "Job",
+    jobs: {
+      title: "Jobs",
       type: "object",
-      properties: {
-        companyName: {
-          title: "Company name",
-          type: "string",
+      additionalProperties: {
+        title: "Job",
+        type: "object",
+        properties: {
+          companyName: {
+            title: "Company name",
+            type: "string",
+          },
+          position: {
+            title: "Position",
+            type: "string",
+            enum: ["Software developer", "Manager", "Tester"],
+          },
         },
-        position: {
-          title: "Position",
-          type: "string",
-          enum: ["Software developer", "Manager", "Tester"],
-        },
+        required: ["companyName", "position"],
       },
-      required: ["companyName", "position"],
     },
     multipleChoicesList: {
       type: "array",
@@ -55,7 +59,7 @@ export const schema: RJSFSchema = {
       uniqueItems: true,
     },
   },
-  required: ["name", "terms", "job"],
+  required: ["name", "terms", "jobs"],
 };
 
 export const uiSchema: UiSchema = {
