@@ -8,6 +8,7 @@ import {
 import { CheckboxWidget } from "./CheckboxWidget";
 import { CheckboxesWidget } from "./CheckboxesWidget";
 import { PasswordWidget } from "./PasswordWidget";
+import { RadioWidget } from "./RadioWidget";
 import { SelectWidget } from "./SelectWidget";
 import { TextWidget } from "./TextWidget";
 import { TextareaWidget } from "./TextareaWidget";
@@ -21,6 +22,7 @@ function generateWidgets<
     CheckboxesWidget,
     CheckboxWidget,
     PasswordWidget,
+    RadioWidget,
     SelectWidget,
     TextareaWidget,
     TextWidget,
