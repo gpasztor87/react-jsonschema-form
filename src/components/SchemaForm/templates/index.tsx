@@ -5,8 +5,10 @@ import {
   type TemplatesType,
 } from "@rjsf/utils";
 
+import { ArrayFieldDescriptionTemplate } from "./ArrayFieldDescriptionTemplate";
 import { ArrayFieldItemTemplate } from "./ArrayFieldItemTemplate";
 import { ArrayFieldTemplate } from "./ArrayFieldTemplate";
+import { ArrayFieldTitleTemplate } from "./ArrayFieldTitleTemplate";
 import { ButtonTemplates } from "./ButtonTemplates";
 import { DescriptionFieldTemplate } from "./DescriptionFieldTemplate";
 import { FieldErrorTemplate } from "./FieldErrorTemplate";
@@ -23,8 +25,10 @@ function generateTemplates<
   F extends FormContextType = any,
 >(): Partial<TemplatesType<T, S, F>> {
   return {
+    ArrayFieldDescriptionTemplate,
     ArrayFieldItemTemplate,
     ArrayFieldTemplate,
+    ArrayFieldTitleTemplate,
     ButtonTemplates: ButtonTemplates(),
     DescriptionFieldTemplate,
     FieldErrorTemplate,
