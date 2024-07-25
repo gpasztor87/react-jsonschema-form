@@ -5,6 +5,8 @@ import {
   type RJSFSchema,
   type StrictRJSFSchema,
   type WidgetProps,
+  descriptionId,
+  getTemplate,
   labelValue,
 } from "@rjsf/utils";
 
@@ -26,7 +28,18 @@ export function CheckboxWidget<
     onChange,
     onFocus,
     value,
+    options,
+    registry,
+    schema,
+    uiSchema,
   } = props;
+
+  const DescriptionFieldTemplate = getTemplate<
+    "DescriptionFieldTemplate",
+    T,
+    S,
+    F
+  >("DescriptionFieldTemplate", registry, options);
 
   const handleChange = useCallback(
     (checked: boolean) => onChange(checked),
@@ -34,17 +47,19 @@ export function CheckboxWidget<
   );
 
   const handleBlur = useCallback(
-    (event: FocusEvent<HTMLButtonElement>) => onBlur(id, event.target.value),
+    ({ target }: FocusEvent<HTMLButtonElement>) => onBlur(id, target.value),
     [id, onBlur],
   );
 
   const handleFocus = useCallback(
-    (event: FocusEvent<HTMLButtonElement>) => onFocus(id, event.target.value),
+    ({ target }: FocusEvent<HTMLButtonElement>) => onFocus(id, target.value),
     [id, onFocus],
   );
 
+  const description = options.description ?? schema.description;
+
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-start space-x-2">
       <Checkbox
         id={id}
         name={id}
@@ -54,7 +69,18 @@ export function CheckboxWidget<
         onBlur={handleBlur}
         onFocus={handleFocus}
       />
-      <Label htmlFor={id}>{labelValue(label, hideLabel, false)}</Label>
+      <div className="grid">
+        <Label htmlFor={id}>{labelValue(label, hideLabel, false)}</Label>
+        {!hideLabel && !!description && (
+          <DescriptionFieldTemplate
+            id={descriptionId<T>(id)}
+            description={description}
+            schema={schema}
+            uiSchema={uiSchema}
+            registry={registry}
+          />
+        )}
+      </div>
     </div>
   );
 }
