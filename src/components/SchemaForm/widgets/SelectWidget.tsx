@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import type { WidgetProps } from "@rjsf/utils";
+import { type WidgetProps } from "@rjsf/utils";
 
 import {
   Select,

@@ -1,4 +1,4 @@
-import type { IconButtonProps, SubmitButtonProps } from "@rjsf/utils";
+import { type IconButtonProps, type SubmitButtonProps } from "@rjsf/utils";
 
 import { Button } from "@/components/ui/button";
 

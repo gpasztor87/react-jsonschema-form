@@ -23,11 +23,26 @@ export const schema: RJSFSchema = {
     telephone: {
       title: "Telephone",
       type: "string",
-      minLegth: 10,
+      minLength: 10,
     },
     terms: {
       title: "Accept terms and conditions",
       type: "boolean",
+    },
+    job: {
+      title: "Job",
+      type: "object",
+      properties: {
+        companyName: {
+          title: "Company name",
+          type: "string",
+        },
+        position: {
+          title: "Position",
+          type: "string",
+        },
+      },
+      required: ["companyName", "position"],
     },
     multipleChoicesList: {
       type: "array",
@@ -39,10 +54,15 @@ export const schema: RJSFSchema = {
       uniqueItems: true,
     },
   },
-  required: ["terms"],
+  required: ["name", "terms", "job"],
 };
 
 export const uiSchema: UiSchema = {
+  name: {
+    "ui:enableMarkdownInDescription": true,
+    "ui:description":
+      "Make things **bold** or *italic*. Embed snippets of `code`. <small>And this is a small texts.</small>",
+  },
   bio: {
     "ui:widget": "textarea",
   },

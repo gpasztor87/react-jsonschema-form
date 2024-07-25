@@ -1,6 +1,6 @@
 import { ChangeEvent, FocusEvent, useCallback } from "react";
 
-import type { WidgetProps } from "@rjsf/utils";
+import { type WidgetProps } from "@rjsf/utils";
 
 import { Textarea } from "@/components/ui/textarea";
 

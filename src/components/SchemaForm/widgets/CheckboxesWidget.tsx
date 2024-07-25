@@ -87,7 +87,9 @@ export function CheckboxesWidget(props: WidgetProps) {
                 disabled={disabled || itemDisabled || readonly}
               />
               {option.label && (
-                <Label htmlFor={optionId(id, index)}>{option.label}</Label>
+                <Label htmlFor={optionId(id, index)} className="cursor-pointer">
+                  {option.label}
+                </Label>
               )}
             </div>
           );

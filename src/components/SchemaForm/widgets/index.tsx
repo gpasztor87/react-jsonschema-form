@@ -1,4 +1,4 @@
-import type { RegistryWidgetsType } from "@rjsf/utils";
+import { type RegistryWidgetsType } from "@rjsf/utils";
 
 import { CheckboxWidget } from "./CheckboxWidget";
 import { CheckboxesWidget } from "./CheckboxesWidget";
