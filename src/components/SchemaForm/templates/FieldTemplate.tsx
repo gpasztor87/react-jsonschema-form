@@ -35,7 +35,9 @@ function FieldLabel(props: FieldTemplateProps) {
   const { id, label, required, schema } = props;
   const formContext = props.formContext as FormContext;
 
-  if (label === "") return null;
+  if (label === "") {
+    return null;
+  }
 
   return (
     <Label htmlFor={id} className="block mb-2">
