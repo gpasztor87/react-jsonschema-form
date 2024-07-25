@@ -40,6 +40,7 @@ export const schema: RJSFSchema = {
         position: {
           title: "Position",
           type: "string",
+          enum: ["Software developer", "Manager", "Tester"],
         },
       },
       required: ["companyName", "position"],
@@ -58,13 +59,11 @@ export const schema: RJSFSchema = {
 };
 
 export const uiSchema: UiSchema = {
-  name: {
+  bio: {
+    "ui:widget": "textarea",
     "ui:enableMarkdownInDescription": true,
     "ui:description":
       "Make things **bold** or *italic*. Embed snippets of `code`. <small>And this is a small texts.</small>",
-  },
-  bio: {
-    "ui:widget": "textarea",
   },
   password: {
     "ui:widget": "password",
