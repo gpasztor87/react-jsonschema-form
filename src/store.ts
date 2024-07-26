@@ -22,6 +22,7 @@ export const useStore = create<AppState>((set) => ({
   formData: samples.Simple.formData,
   label: "Simple",
   setLabel: (label: string) => {
+    // @ts-expect-error resolve later
     const sample: Sample = samples[label];
     set({
       label,

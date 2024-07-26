@@ -50,7 +50,7 @@ function App() {
                 <EditorView title="JSON schema" data={schema} />
               </div>
               <div>
-                <EditorView title="UI schema" data={uiSchema} />
+                <EditorView title="UI schema" data={uiSchema || {}} />
               </div>
               <div>
                 <EditorView title="Form data" data={formData} />
