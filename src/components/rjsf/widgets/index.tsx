@@ -12,6 +12,7 @@ import { RadioWidget } from "./RadioWidget";
 import { SelectWidget } from "./SelectWidget";
 import { TextWidget } from "./TextWidget";
 import { TextareaWidget } from "./TextareaWidget";
+import { UpDownWidget } from "./UpDownWidget";
 
 function generateWidgets<
   T = any,
@@ -26,6 +27,7 @@ function generateWidgets<
     SelectWidget,
     TextareaWidget,
     TextWidget,
+    UpDownWidget,
   };
 }
 
