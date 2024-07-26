@@ -6,9 +6,11 @@
   "importOrder": [
     "^(react/(.*)$)|^(react$)",
     "<THIRD_PARTY_MODULES>",
+    "^ace-builds(.*)$",
     "^@/components/(.*)$",
     "^@/hooks/(.*)$",
     "^@/lib/(.*)$",
+    "^@/store(.*)$",
     "^[./]"
   ],
   "importOrderSeparation": true,

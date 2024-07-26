@@ -8,8 +8,8 @@ import {
 } from "@rjsf/utils";
 import validator from "@rjsf/validator-ajv8";
 
-import templates from "@/components/SchemaForm/templates";
-import widgets from "@/components/SchemaForm/widgets";
+import templates from "@/components/rjsf/templates";
+import widgets from "@/components/rjsf/widgets";
 
 export interface SchemaFormProps {
   schema: RJSFSchema;
