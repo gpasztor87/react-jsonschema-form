@@ -5,6 +5,7 @@ import errors from "./errors";
 import ifThenElse from "./ifThenElse";
 import nested from "./nested";
 import nullable from "./nullable";
+import numbers from "./numbers";
 import propertyDependencies from "./propertyDependencies";
 import schemaDependencies from "./schemaDependencies";
 import simple from "./simple";
@@ -13,6 +14,7 @@ import single from "./single";
 export const samples = Object.freeze({
   Simple: simple,
   Nested: nested,
+  Numbers: numbers,
   Single: single,
   Errors: errors,
   "Custom Object": customObject,
