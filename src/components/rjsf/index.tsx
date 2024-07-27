@@ -41,7 +41,6 @@ export const SchemaForm = forwardRef<SchemaFormRef, SchemaFormProps>(
         widgets={widgets}
         formData={props.formData}
         autoComplete="off"
-        showErrorList={false}
         formContext={formContext}
         onSubmit={(data) => {
           props.onSubmit(data.formData);

@@ -12,6 +12,7 @@ import { ArrayFieldTitleTemplate } from "./ArrayFieldTitleTemplate";
 import { BaseInputTemplate } from "./BaseInputTemplate";
 import { ButtonTemplates } from "./ButtonTemplates";
 import { DescriptionFieldTemplate } from "./DescriptionFieldTemplate";
+import { ErrorListTemplate } from "./ErrorListTemplate";
 import { FieldErrorTemplate } from "./FieldErrorTemplate";
 import { FieldHelpTemplate } from "./FieldHelpTemplate";
 import { FieldTemplate } from "./FieldTemplate";
@@ -24,7 +25,7 @@ function generateTemplates<
   T = any,
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
->(): Partial<TemplatesType<T, S, F>> {
+>(): TemplatesType<T, S, F> {
   return {
     ArrayFieldDescriptionTemplate,
     ArrayFieldItemTemplate,
@@ -33,6 +34,7 @@ function generateTemplates<
     BaseInputTemplate,
     ButtonTemplates: ButtonTemplates(),
     DescriptionFieldTemplate,
+    ErrorListTemplate,
     FieldErrorTemplate,
     FieldHelpTemplate,
     FieldTemplate,
