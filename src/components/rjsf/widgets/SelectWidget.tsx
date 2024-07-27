@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-
 import {
   type FormContextType,
   type RJSFSchema,
@@ -7,6 +5,14 @@ import {
   type WidgetProps,
 } from "@rjsf/utils";
 
+import {
+  MultiSelector,
+  MultiSelectorContent,
+  MultiSelectorInput,
+  MultiSelectorItem,
+  MultiSelectorList,
+  MultiSelectorTrigger,
+} from "@/components/ui/multi-select";
 import {
   Select,
   SelectContent,
@@ -21,36 +27,65 @@ export function SelectWidget<
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: WidgetProps<T, S, F>) {
-  const { id, name, placeholder, value, onChange } = props;
+  const {
+    id,
+    options,
+    value,
+    disabled,
+    multiple = false,
+    onChange,
+    placeholder,
+  } = props;
+  const { enumOptions, enumDisabled } = options;
 
-  const options = useMemo(() => {
-    return (props.schema.enum ?? []).map((id: any) => {
-      return { id, name: id };
-    });
-  }, [props.schema]);
-
-  return (
-    <Select
-      name={name}
-      value={value}
-      onValueChange={(value: string) => {
-        onChange(value);
-      }}
-    >
-      <>
-        <SelectTrigger id={id}>
-          <SelectValue placeholder={placeholder} />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {options.map((option: any) => (
-              <SelectItem key={option.id} value={option.id}>
-                {option.name}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </>
-    </Select>
-  );
+  if (multiple) {
+    return (
+      <MultiSelector
+        values={value}
+        onValuesChange={(value: string[]) => onChange(value)}
+      >
+        <MultiSelectorTrigger>
+          <MultiSelectorInput placeholder={placeholder} />
+        </MultiSelectorTrigger>
+        <MultiSelectorContent>
+          <MultiSelectorList>
+            {Array.isArray(enumOptions) &&
+              enumOptions.map(({ value, label }, i) => {
+                const disabled =
+                  enumDisabled && enumDisabled.indexOf(value) !== -1;
+                return (
+                  <MultiSelectorItem key={i} value={value} disabled={disabled}>
+                    {label}
+                  </MultiSelectorItem>
+                );
+              })}
+          </MultiSelectorList>
+        </MultiSelectorContent>
+      </MultiSelector>
+    );
+  } else {
+    return (
+      <Select value={value} disabled={disabled} onValueChange={onChange}>
+        <>
+          <SelectTrigger id={id}>
+            <SelectValue placeholder={placeholder} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {Array.isArray(enumOptions) &&
+                enumOptions.map(({ value, label }, i) => {
+                  const disabled =
+                    enumDisabled && enumDisabled.indexOf(value) !== -1;
+                  return (
+                    <SelectItem key={i} value={value} disabled={disabled}>
+                      {label}
+                    </SelectItem>
+                  );
+                })}
+            </SelectGroup>
+          </SelectContent>
+        </>
+      </Select>
+    );
+  }
 }

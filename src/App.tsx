@@ -57,7 +57,7 @@ function App() {
               </div>
             </div>
             <div className="col-span-2 grid items-start gap-6 lg:col-span-1">
-              <div className="overflow-hidden bg-background">
+              <div className="bg-background">
                 <div className="border p-5">
                   <SchemaForm
                     schema={schema}
