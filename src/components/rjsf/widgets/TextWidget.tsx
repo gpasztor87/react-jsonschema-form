@@ -1,64 +1,23 @@
-import { ChangeEvent, FocusEvent, useCallback } from "react";
-
 import {
   type FormContextType,
   type RJSFSchema,
   type StrictRJSFSchema,
   type WidgetProps,
-  getInputProps,
+  getTemplate,
 } from "@rjsf/utils";
-
-import { Input } from "@/components/ui/input";
 
 export function TextWidget<
   T = any,
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: WidgetProps<T, S, F>) {
-  const {
-    id,
-    name,
-    value,
-    onBlur,
-    onChange,
-    onFocus,
-    autofocus,
-    readonly,
-    disabled,
+  const { options, registry } = props;
+
+  const BaseInputTemplate = getTemplate<"BaseInputTemplate", T, S, F>(
+    "BaseInputTemplate",
+    registry,
     options,
-    schema,
-  } = props;
-  const inputProps = getInputProps<T, S, F>(schema, undefined, options);
-
-  const handleChange = useCallback(
-    ({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
-      onChange(value === "" ? options.emptyValue : value),
-    [onChange, options],
   );
 
-  const handleBlur = useCallback(
-    ({ target }: FocusEvent<HTMLInputElement>) =>
-      onBlur(id, target && target.value),
-    [onBlur, id],
-  );
-
-  const handleFocus = useCallback(
-    ({ target }: FocusEvent<HTMLInputElement>) =>
-      onFocus(id, target && target.value),
-    [onFocus, id],
-  );
-
-  return (
-    <Input
-      id={id}
-      name={name}
-      value={value || value === 0 ? value : ""}
-      disabled={disabled || readonly}
-      autoFocus={autofocus}
-      {...inputProps}
-      onBlur={handleBlur}
-      onChange={handleChange}
-      onFocus={handleFocus}
-    />
-  );
+  return <BaseInputTemplate {...props} />;
 }

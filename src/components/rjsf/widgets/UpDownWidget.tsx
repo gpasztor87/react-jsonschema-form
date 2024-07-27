@@ -3,14 +3,21 @@ import {
   type RJSFSchema,
   type StrictRJSFSchema,
   type WidgetProps,
+  getTemplate,
 } from "@rjsf/utils";
-
-import { TextWidget } from "./TextWidget";
 
 export function UpDownWidget<
   T = any,
   S extends StrictRJSFSchema = RJSFSchema,
   F extends FormContextType = any,
 >(props: WidgetProps<T, S, F>) {
-  return <TextWidget {...props} />;
+  const { options, registry } = props;
+
+  const BaseInputTemplate = getTemplate<"BaseInputTemplate", T, S, F>(
+    "BaseInputTemplate",
+    registry,
+    options,
+  );
+
+  return <BaseInputTemplate {...props} />;
 }

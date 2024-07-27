@@ -9,6 +9,7 @@ import { ArrayFieldDescriptionTemplate } from "./ArrayFieldDescriptionTemplate";
 import { ArrayFieldItemTemplate } from "./ArrayFieldItemTemplate";
 import { ArrayFieldTemplate } from "./ArrayFieldTemplate";
 import { ArrayFieldTitleTemplate } from "./ArrayFieldTitleTemplate";
+import { BaseInputTemplate } from "./BaseInputTemplate";
 import { ButtonTemplates } from "./ButtonTemplates";
 import { DescriptionFieldTemplate } from "./DescriptionFieldTemplate";
 import { FieldErrorTemplate } from "./FieldErrorTemplate";
@@ -29,6 +30,7 @@ function generateTemplates<
     ArrayFieldItemTemplate,
     ArrayFieldTemplate,
     ArrayFieldTitleTemplate,
+    BaseInputTemplate,
     ButtonTemplates: ButtonTemplates(),
     DescriptionFieldTemplate,
     FieldErrorTemplate,
