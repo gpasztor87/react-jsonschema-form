@@ -7,6 +7,7 @@ import {
 
 import { CheckboxWidget } from "./CheckboxWidget";
 import { CheckboxesWidget } from "./CheckboxesWidget";
+import { DateWidget } from "./DateWidget";
 import { PasswordWidget } from "./PasswordWidget";
 import { RadioWidget } from "./RadioWidget";
 import { RangeWidget } from "./RangeWidget";
@@ -23,6 +24,7 @@ function generateWidgets<
   return {
     CheckboxesWidget,
     CheckboxWidget,
+    DateWidget,
     PasswordWidget,
     RadioWidget,
     RangeWidget,
