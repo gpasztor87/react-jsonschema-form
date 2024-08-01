@@ -3,6 +3,8 @@ import {
   type RJSFSchema,
   type StrictRJSFSchema,
   type WidgetProps,
+  enumOptionsIndexForValue,
+  enumOptionsValueForIndex,
 } from "@rjsf/utils";
 
 import {
@@ -36,13 +38,28 @@ export function SelectWidget<
     onChange,
     placeholder,
   } = props;
-  const { enumOptions, enumDisabled } = options;
+  const { enumOptions, enumDisabled, emptyValue } = options;
+
+  const handleChange = (newValue: string | string[]) => {
+    onChange(enumOptionsValueForIndex<S>(newValue, enumOptions, emptyValue));
+  };
+
+  const selectedIndexes = enumOptionsIndexForValue<S>(
+    value,
+    enumOptions,
+    multiple,
+  );
 
   if (multiple) {
     return (
       <MultiSelector
-        values={value}
-        onValuesChange={(value: string[]) => onChange(value)}
+        values={
+          typeof selectedIndexes !== "undefined"
+            ? (selectedIndexes as string[])
+            : emptyValue
+        }
+        onValuesChange={handleChange}
+        enumOptions={enumOptions}
       >
         <MultiSelectorTrigger>
           <MultiSelectorInput placeholder={placeholder} />
@@ -54,7 +71,11 @@ export function SelectWidget<
                 const disabled =
                   enumDisabled && enumDisabled.indexOf(value) !== -1;
                 return (
-                  <MultiSelectorItem key={i} value={value} disabled={disabled}>
+                  <MultiSelectorItem
+                    key={i}
+                    value={String(i)}
+                    disabled={disabled}
+                  >
                     {label}
                   </MultiSelectorItem>
                 );
@@ -65,26 +86,32 @@ export function SelectWidget<
     );
   } else {
     return (
-      <Select value={value} disabled={disabled} onValueChange={onChange}>
-        <>
-          <SelectTrigger id={id}>
-            <SelectValue placeholder={placeholder} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              {Array.isArray(enumOptions) &&
-                enumOptions.map(({ value, label }, i) => {
-                  const disabled =
-                    enumDisabled && enumDisabled.indexOf(value) !== -1;
-                  return (
-                    <SelectItem key={i} value={value} disabled={disabled}>
-                      {label}
-                    </SelectItem>
-                  );
-                })}
-            </SelectGroup>
-          </SelectContent>
-        </>
+      <Select
+        value={
+          typeof selectedIndexes !== "undefined"
+            ? (selectedIndexes as string)
+            : emptyValue
+        }
+        disabled={disabled}
+        onValueChange={handleChange}
+      >
+        <SelectTrigger id={id}>
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {Array.isArray(enumOptions) &&
+              enumOptions.map(({ value, label }, i) => {
+                const disabled =
+                  enumDisabled && enumDisabled.indexOf(value) !== -1;
+                return (
+                  <SelectItem key={i} value={String(i)} disabled={disabled}>
+                    {label}
+                  </SelectItem>
+                );
+              })}
+          </SelectGroup>
+        </SelectContent>
       </Select>
     );
   }

@@ -5,6 +5,8 @@ import {
   type StrictRJSFSchema,
 } from "@rjsf/utils";
 
+import { AltDateTimeWidget } from "./AltDateTimeWidget";
+import { AltDateWidget } from "./AltDateWidget";
 import { CheckboxWidget } from "./CheckboxWidget";
 import { CheckboxesWidget } from "./CheckboxesWidget";
 import { DateWidget } from "./DateWidget";
@@ -14,6 +16,7 @@ import { RangeWidget } from "./RangeWidget";
 import { SelectWidget } from "./SelectWidget";
 import { TextWidget } from "./TextWidget";
 import { TextareaWidget } from "./TextareaWidget";
+import { TimeWidget } from "./TimeWidget";
 import { UpDownWidget } from "./UpDownWidget";
 
 function generateWidgets<
@@ -22,6 +25,8 @@ function generateWidgets<
   F extends FormContextType = any,
 >(): RegistryWidgetsType<T, S, F> {
   return {
+    AltDateTimeWidget,
+    AltDateWidget,
     CheckboxesWidget,
     CheckboxWidget,
     DateWidget,
@@ -31,6 +36,7 @@ function generateWidgets<
     SelectWidget,
     TextareaWidget,
     TextWidget,
+    TimeWidget,
     UpDownWidget,
   };
 }

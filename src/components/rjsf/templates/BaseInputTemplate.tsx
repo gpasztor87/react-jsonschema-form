@@ -19,16 +19,29 @@ export function BaseInputTemplate<
     id,
     name,
     value,
+    type,
     onBlur,
     onChange,
+    onChangeOverride,
     onFocus,
     autofocus,
     readonly,
     disabled,
     options,
+    hideLabel,
+    hideError,
+    rawErrors,
+    formContext,
+    registry,
     schema,
+    uiSchema,
+    ...rest
   } = props;
-  const inputProps = getInputProps<T, S, F>(schema, undefined, options);
+
+  const inputProps = {
+    ...rest,
+    ...getInputProps<T, S, F>(schema, type, options),
+  };
 
   const handleChange = useCallback(
     ({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
@@ -64,7 +77,7 @@ export function BaseInputTemplate<
       autoFocus={autofocus}
       {...inputProps}
       onBlur={handleBlur}
-      onChange={handleChange}
+      onChange={onChangeOverride || handleChange}
       onFocus={handleFocus}
     />
   );

@@ -9,6 +9,7 @@ import React, {
   useState,
 } from "react";
 
+import { EnumOptionsType, enumOptionsValueForIndex } from "@rjsf/utils";
 import { Command as CommandPrimitive } from "cmdk";
 import { Check, X as RemoveIcon } from "lucide-react";
 
@@ -25,12 +26,14 @@ import { cn } from "@/lib/utils";
 type MultiSelectorProps = {
   values: string[];
   onValuesChange: (value: string[]) => void;
+  enumOptions: EnumOptionsType[] | undefined;
   loop?: boolean;
 } & React.ComponentPropsWithoutRef<typeof CommandPrimitive>;
 
 interface MultiSelectContextProps {
   value: string[];
   onValueChange: (value: any) => void;
+  enumOptions: EnumOptionsType[] | undefined;
   open: boolean;
   setOpen: (value: boolean) => void;
   inputValue: string;
@@ -52,6 +55,7 @@ const useMultiSelect = () => {
 const MultiSelector = ({
   values: value,
   onValuesChange: onValueChange,
+  enumOptions,
   loop = false,
   className,
   children,
@@ -70,7 +74,7 @@ const MultiSelector = ({
         onValueChange([...value, val]);
       }
     },
-    [value],
+    [onValueChange, value],
   );
 
   // TODO : change from else if use to switch case statement
@@ -123,7 +127,7 @@ const MultiSelector = ({
         }
       }
     },
-    [value, inputValue, activeIndex, loop],
+    [value, dir, activeIndex, loop, inputValue.length, onValueChange],
   );
 
   return (
@@ -131,6 +135,7 @@ const MultiSelector = ({
       value={{
         value,
         onValueChange: onValueChangeHandler,
+        enumOptions,
         open,
         setOpen,
         inputValue,
@@ -158,7 +163,7 @@ const MultiSelectorTrigger = forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
-  const { value, onValueChange, activeIndex } = useMultiSelect();
+  const { value, onValueChange, enumOptions, activeIndex } = useMultiSelect();
 
   const mousePreventDefault = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
@@ -183,7 +188,9 @@ const MultiSelectorTrigger = forwardRef<
           )}
           variant={"secondary"}
         >
-          <span className="text-xs">{item}</span>
+          <span className="text-xs">
+            {enumOptionsValueForIndex(item, enumOptions)}
+          </span>
           <button
             aria-label={`Remove ${item} option`}
             aria-roledescription="button to remove option"

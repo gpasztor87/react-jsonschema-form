@@ -2,6 +2,7 @@ import additionalProperties from "./additionalProperties";
 import arrays from "./arrays";
 import customArray from "./customArray";
 import customObject from "./customObject";
+import date from "./date";
 import defaults from "./defaults";
 import errors from "./errors";
 import ifThenElse from "./ifThenElse";
@@ -22,6 +23,7 @@ export const samples = Object.freeze({
   Numbers: numbers,
   Ordering: ordering,
   References: references,
+  "Date & time": date,
   Single: single,
   Errors: errors,
   "Custom Object": customObject,
