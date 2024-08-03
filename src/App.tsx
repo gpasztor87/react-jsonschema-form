@@ -1,3 +1,6 @@
+import { useState } from "react";
+
+import { CheckCircleIcon, CircleAlertIcon } from "lucide-react";
 import AceEditor from "react-ace";
 
 import "ace-builds/src-noconflict/mode-json";
@@ -11,18 +14,42 @@ const selector = (state: AppState) => ({
   schema: state.schema,
   uiSchema: state.uiSchema,
   formData: state.formData,
+  setSchema: state.setSchema,
+  setUiSchema: state.setUiSchema,
+  setFormData: state.setFormData,
 });
 
-const EditorView = ({ title, data }: { title: string; data: object }) => {
+interface EditorProps {
+  title: string;
+  data: string;
+  setData: (value: string) => void;
+}
+
+const EditorView = ({ title, data, setData }: EditorProps) => {
+  const [valid, setValid] = useState(true);
   return (
     <div className="overflow-hidden bg-background border">
-      <div className="px-4 py-5 border-b">
-        <h3 className="text-base font-semibold leading-6 ">{title}</h3>
+      <div className="px-4 py-3 border-b">
+        <h3 className="text-base font-semibold leading-6 flex items-center gap-2">
+          <div>{title}</div>
+          {valid ? (
+            <CheckCircleIcon className="h-4 w-4 text-green-500" />
+          ) : (
+            <CircleAlertIcon className="h-4 w-4 text-destructive" />
+          )}
+        </h3>
       </div>
       <AceEditor
         mode="json"
-        readOnly={true}
         value={JSON.stringify(data, null, "\t")}
+        onChange={(value: string) => {
+          try {
+            setData(JSON.parse(value));
+            setValid(true);
+          } catch (e) {
+            setValid(false);
+          }
+        }}
         style={{ width: "100%" }}
         editorProps={{ $blockScrolling: true }}
       />
@@ -31,7 +58,8 @@ const EditorView = ({ title, data }: { title: string; data: object }) => {
 };
 
 function App() {
-  const { schema, uiSchema, formData } = useStore(selector);
+  const { schema, setSchema, uiSchema, setUiSchema, formData, setFormData } =
+    useStore(selector);
 
   return (
     <section className="grid items-center gap-6 pb-8 p-6">
@@ -47,13 +75,25 @@ function App() {
           <div className="items-start justify-center gap-6 p-8 md:grid md:grid-cols-2">
             <div className="col-span-2 grid items-start gap-6 lg:col-span-1">
               <div>
-                <EditorView title="JSON schema" data={schema} />
+                <EditorView
+                  title="JSON schema"
+                  data={schema}
+                  setData={setSchema}
+                />
               </div>
               <div>
-                <EditorView title="UI schema" data={uiSchema || {}} />
+                <EditorView
+                  title="UI schema"
+                  data={uiSchema || {}}
+                  setData={setUiSchema}
+                />
               </div>
               <div>
-                <EditorView title="Form data" data={formData} />
+                <EditorView
+                  title="Form data"
+                  data={formData}
+                  setData={setFormData}
+                />
               </div>
             </div>
             <div className="col-span-2 grid items-start gap-6 lg:col-span-1">
@@ -63,7 +103,7 @@ function App() {
                     schema={schema}
                     uiSchema={uiSchema}
                     formData={formData}
-                    onSubmit={console.log}
+                    onSubmit={setFormData}
                   />
                 </div>
               </div>

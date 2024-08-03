@@ -1,5 +1,5 @@
 import { samples } from "@/playground";
-import { RJSFSchema } from "@rjsf/utils";
+import { RJSFSchema, UiSchema } from "@rjsf/utils";
 import { create } from "zustand";
 
 type Sample = {
@@ -9,11 +9,14 @@ type Sample = {
 };
 
 export type AppState = {
-  schema: RJSFSchema;
-  uiSchema: object;
-  formData: object;
+  schema: any;
+  uiSchema: any;
+  formData: any;
   label: string;
   setLabel: (label: string) => void;
+  setSchema: (value: string) => void;
+  setUiSchema: (value: string) => void;
+  setFormData: (value: string) => void;
 };
 
 export const useStore = create<AppState>((set) => ({
@@ -21,14 +24,23 @@ export const useStore = create<AppState>((set) => ({
   uiSchema: samples.Simple.uiSchema,
   formData: samples.Simple.formData,
   label: "Simple",
+  setSchema: (value: string) => {
+    set({ schema: value });
+  },
+  setUiSchema: (value: string) => {
+    set({ uiSchema: value });
+  },
+  setFormData: (value: string) => {
+    set({ formData: value });
+  },
   setLabel: (label: string) => {
     // @ts-expect-error resolve later
     const sample: Sample = samples[label];
     set({
       label,
       schema: sample.schema as RJSFSchema,
-      uiSchema: sample.uiSchema as object,
-      formData: sample.formData as object,
+      uiSchema: sample.uiSchema as UiSchema,
+      formData: sample.formData,
     });
   },
 }));
