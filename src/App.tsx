@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { CheckCircleIcon, CircleAlertIcon } from "lucide-react";
 
+import ErrorBoundary from "@/components/ErrorBoundary";
 import { Samples } from "@/components/Samples";
 import { SchemaForm } from "@/components/rjsf";
 
@@ -110,12 +111,14 @@ function App() {
             <div className="col-span-2 grid items-start gap-6 lg:col-span-1">
               <div className="bg-background">
                 <div className="border p-5">
-                  <SchemaForm
-                    schema={schema}
-                    uiSchema={uiSchema}
-                    formData={formData}
-                    onSubmit={setFormData}
-                  />
+                  <ErrorBoundary>
+                    <SchemaForm
+                      schema={schema}
+                      uiSchema={uiSchema}
+                      formData={formData}
+                      onSubmit={setFormData}
+                    />
+                  </ErrorBoundary>
                 </div>
               </div>
             </div>
