@@ -1,9 +1,7 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
+import Editor from "@monaco-editor/react";
 import { CheckCircleIcon, CircleAlertIcon } from "lucide-react";
-import AceEditor from "react-ace";
-
-import "ace-builds/src-noconflict/mode-json";
 
 import { Samples } from "@/components/Samples";
 import { SchemaForm } from "@/components/rjsf";
@@ -27,6 +25,24 @@ interface EditorProps {
 
 const EditorView = ({ title, data, setData }: EditorProps) => {
   const [valid, setValid] = useState(true);
+
+  const onCodeChange = useCallback(
+    (code: string | undefined) => {
+      if (!code) {
+        return;
+      }
+
+      try {
+        const parsed = JSON.parse(code);
+        setValid(true);
+        setData(parsed);
+      } catch (e) {
+        setValid(false);
+      }
+    },
+    [setData],
+  );
+
   return (
     <div className="overflow-hidden bg-background border">
       <div className="px-4 py-3 border-b">
@@ -39,19 +55,12 @@ const EditorView = ({ title, data, setData }: EditorProps) => {
           )}
         </h3>
       </div>
-      <AceEditor
-        mode="json"
-        value={JSON.stringify(data, null, "\t")}
-        onChange={(value: string) => {
-          try {
-            setData(JSON.parse(value));
-            setValid(true);
-          } catch (e) {
-            setValid(false);
-          }
-        }}
-        style={{ width: "100%" }}
-        editorProps={{ $blockScrolling: true }}
+      <Editor
+        language="json"
+        height="40vh"
+        value={data}
+        theme="vs-light"
+        onChange={onCodeChange}
       />
     </div>
   );
@@ -60,6 +69,8 @@ const EditorView = ({ title, data, setData }: EditorProps) => {
 function App() {
   const { schema, setSchema, uiSchema, setUiSchema, formData, setFormData } =
     useStore(selector);
+
+  const toJson = (val: unknown) => JSON.stringify(val, null, 2);
 
   return (
     <section className="grid items-center gap-6 pb-8 p-6">
@@ -77,21 +88,21 @@ function App() {
               <div>
                 <EditorView
                   title="JSON schema"
-                  data={schema}
+                  data={toJson(schema)}
                   setData={setSchema}
                 />
               </div>
               <div>
                 <EditorView
                   title="UI schema"
-                  data={uiSchema || {}}
+                  data={toJson(uiSchema || {})}
                   setData={setUiSchema}
                 />
               </div>
               <div>
                 <EditorView
                   title="Form data"
-                  data={formData}
+                  data={toJson(formData)}
                   setData={setFormData}
                 />
               </div>
